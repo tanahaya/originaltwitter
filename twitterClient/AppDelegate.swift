@@ -7,16 +7,27 @@
 //
 
 import UIKit
+import Fabric
+import TwitterKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var myNavigationController: UINavigationController?
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        Fabric.with([Twitter.self()])
+        let first: TimelineViewController = TimelineViewController()
+        myNavigationController = UINavigationController(rootViewController: first)
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        self.window?.rootViewController = myNavigationController
+        self.window?.makeKeyAndVisible()
+
         return true
+        
     }
 
     func applicationWillResignActive(application: UIApplication) {
